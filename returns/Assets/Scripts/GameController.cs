@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
    class Manager{
 
    }
+   
 
 
    // member vars
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour
    int funds;
    int unhappiness;
    int maxCustomers;
+   int days;
+
 
 
     // run once
@@ -37,6 +40,11 @@ public class GameController : MonoBehaviour
     // run once per frame
     void Update() 
     {
-        
+       // day loop
+        for(int i=0; i<days; i++){
+           for(int i=0; i<)
+
+
+        }
     }
 }
