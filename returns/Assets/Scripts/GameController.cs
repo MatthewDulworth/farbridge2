@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-   enum State {
+   enum DayState {
       DAY_BEGIN,
       RETURNS,
+      INSPECT,
       DAY_END,
+   }
+   enum Action {
+      ACCEPT,
+      DENY,
+      INSPECT,
+      BACK,
+      NONE
    }
 
    // --- member vars --- //
@@ -19,7 +27,7 @@ public class GameController : MonoBehaviour
    GameObject currentCustomerObject;
    GameObject currentPackageObject;
    Customer currentCustomer;
-   State dayState;
+   DayState dayState;
 
    // serialized vars
    [SerializeField]
@@ -28,6 +36,12 @@ public class GameController : MonoBehaviour
    int happiness;
    [SerializeField]
    List<Day> days;
+
+   public string acceptKey = "A";
+   public string denyKey = "D";
+   public string inspectKey = "I";
+   public string backKey = "B";
+
    
    // --- functions --- //
 
@@ -38,13 +52,13 @@ public class GameController : MonoBehaviour
    void changeFunds(int value){
       funds += value;
    }
-   void changeDayState(State state) {
+   void changeDayState(DayState state) {
       dayState = state;
       Debug.LogFormat("game state: {0}", state);
    }
    
+   // TODO: make this do something
    void newCustomer(){
-      currentCustomer = days[currentDay].customers[customerIndex];
       currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
       currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].package.gameObject, transform);
    }
@@ -58,10 +72,9 @@ public class GameController : MonoBehaviour
       if(customerIndex != days[currentDay].customers.Count){
          newCustomer();
       } else {
-         changeDayState(State.DAY_END);
+         changeDayState(DayState.DAY_END);
       }
    }
-   
    void accept() {
       Debug.LogFormat("Package {0} accepted", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
@@ -75,58 +88,49 @@ public class GameController : MonoBehaviour
       changeHappiness(value);
       endCustomer();
    }
-   // TODO: make this work
-   void inspect() {
-      Debug.LogFormat("You opened the box, description: {0}", currentCustomer.package.description);
-   }
-
-   // TODO: make these work
-   void managerPositive(){
-      // the manager has some positive dialouge
-   }
-   void loseGame(){
-      // the manager has some negative dialouge
-      Debug.LogFormat("You lose");
-      UnityEditor.EditorApplication.isPlaying = false;
-   }
-   void winGame(){
-      // the manager has some positive dialouge
-      Debug.LogFormat("You win");
-      UnityEditor.EditorApplication.isPlaying = false;
-   }
-   void joeMama(){
-      // joe mama ending
-   }
 
    void dayBegin() {
       Debug.LogFormat("Day {0} begin", currentDay);
+   
       customerIndex = 0;
-
-      newCustomer();
-      changeDayState(State.RETURNS);
+      currentCustomer = days[currentDay].customers[customerIndex];
+      changeDayState(DayState.RETURNS);
    }
    void returns() {
-      if (Input.GetKeyUp(KeyCode.A)) {
+      Action selectedAction = Action.NONE;
+
+      if (Input.GetKeyDown(KeyCode.A)) {
          accept();
-      } else if (Input.GetKeyUp(KeyCode.D)) {
+      } else if (Input.GetKeyDown(KeyCode.D)) {
          deny();
-      } else if (Input.GetKeyUp(KeyCode.I)) {
-         inspect();
+      } else if (Input.GetKeyDown(inspectKey)) {
+         changeDayState(DayState.INSPECT);
+      }
+   }
+   void inspect() {
+
+      // rotate
+      int direction = 0;
+      if(Input.GetKeyDown(KeyCode.UpArrow)){
+         direction += DOWN;
+      } 
+      if(Input.GetKeyDown(KeyCode.DownArrow)){
+         direction += UP;
+      }
+
+      if(Input.GetKeyDown(KeyCode.B)){
+         changeDayState(DayState.RETURNS);
       }
    }
    void dayEnd(){
-      Debug.LogFormat("Day {0} end, happiness {1}, funds{2}", currentDay, happiness, funds);
+      Debug.LogFormat("Day {0} end", currentDay);
 
-      if(happiness <= 0 || funds <=0) {
-         loseGame();
-      } 
-      else if(currentDay+1 != days.Count) {
+      if(currentDay+1 != days.Count){
          currentDay++;
-         managerPositive();
-         changeDayState(State.DAY_BEGIN);
-      }
-      else{
-         winGame();
+         changeDayState(DayState.DAY_BEGIN);
+      }else{
+         Debug.LogFormat("Game end");
+         UnityEditor.EditorApplication.isPlaying = false;
       }
    }
 
@@ -138,7 +142,7 @@ public class GameController : MonoBehaviour
       currentDay = 0;
       funds = 100;
       happiness = 100;
-      dayState = State.DAY_BEGIN;
+      dayState = DayState.DAY_BEGIN;
    }
 
    // --- Update --- //
@@ -146,13 +150,16 @@ public class GameController : MonoBehaviour
 
       switch (dayState)
       {
-         case State.DAY_BEGIN:
+         case DayState.DAY_BEGIN:
             dayBegin();
             break;
-         case State.RETURNS:
+         case DayState.RETURNS:
             returns();
             break;
-         case State.DAY_END:
+         case DayState.INSPECT:
+            inspect();
+            break;
+         case DayState.DAY_END:
             dayEnd();
             break;
       }
