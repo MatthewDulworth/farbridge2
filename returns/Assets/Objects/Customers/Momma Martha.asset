@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f85b3e4cb3b492997f61937114effc, type: 3}
+  m_Name: Momma Martha
+  m_EditorClassIdentifier: 
+  gameObject: {fileID: 0}
+  recipt: {fileID: 0}
+  package: {fileID: 0}
+  introDialouge: "Yes, I just spoke to Tobias on the phone. He said that you would
+    give me my money back! Johnny, don\u2019t stick that in your nose!"
+  acceptDialouge: Well then, I guess this store is good for something! Johnny, eat
+    that paper!
+  denyDialouge: "I\u2019ll be speaking to your manager! Johnny, don\u2019t touch that
+    cable!"

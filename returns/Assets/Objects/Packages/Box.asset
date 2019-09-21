@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0978943933ff640de938b2d3d4136a91, type: 3}
+  m_Name: Box
+  m_EditorClassIdentifier: 
+  legit: 0
+  gameObject: {fileID: 0}
+  descriptions:
+  - There are some strange rustling sounds coming from inside this box. The rustling
+    intensifies as you reach out to touch it.
+  - A box. A fine box. A really great box. A box that redefines boxness. Truly, a
+    paradigm of boxes everywhere!
+  - A beeping noise can be heard from inside the box. As you lean in closer you hear
+    it beep faster and faster. After a moment, it stops.
+  - A box. Many a dark horrors could be within such a container. Or it could just
+    be a box.
