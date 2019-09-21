@@ -5,19 +5,25 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
    // --- classes --- //
-   class Package {
-      bool legit;
-      string descsription;
-      GameObject gameObject;
+   [System.Serializable]
+   public class Package {
 
+      [SerializeField]
+      bool legit;
+
+      [SerializeField]
+      string descsription;
+
+      [SerializeField]
+      GameObject gameObject;
 
       public bool isLegit() {
          return legit;
       }
       public bool displayText(){
-
+         return true;
       }
-      public bool rotate(int direction){
+      public void rotate(int direction){
          switch(direction){
             case RIGHT:
                break;
@@ -26,17 +32,28 @@ public class GameController : MonoBehaviour
          }
       }
    }
-   class Customer {
+   
+   [System.Serializable]
+   public class Customer {
+      [SerializeField]
       GameObject gameObject;
+
+      [SerializeField]
       GameObject recipt;
+
+      [SerializeField]
       Package package;
+
+      [SerializeField]
       string dialouge;
 
       public Package getPackage() {
          return package;
       }
    }
-   class Manager {
+
+   [System.Serializable]
+   public class Manager {
       string positiveDialouge;
       string gameEndDialouge;
    }
@@ -55,10 +72,10 @@ public class GameController : MonoBehaviour
 
 
    // --- member vars --- //
-   const string acceptKey = "A";
-   const string denyKey = "D";
-   const string inspectKey = "I";
-   const string backKey = "B";
+   public string acceptKey = "A";
+   public string denyKey = "D";
+   public string inspectKey = "I";
+   public string backKey = "B";
    const int LEFT = -1;
    const int RIGHT = 1;
 
@@ -69,7 +86,7 @@ public class GameController : MonoBehaviour
    const int days = 3;
    int currentDay;
    int customerIndex;
-   Customer currentCustomer;
+   public Customer currentCustomer;
    List<Customer>[] customersForDay;
 
    // --- functions --- //
@@ -77,9 +94,11 @@ public class GameController : MonoBehaviour
    // TODO: update happiness icons
    void changeHappiness(int value) {
       happiness += value;
+      Debug.LogFormat("current happiness: {0}", happiness);
    }
    void changeDayState(DayState state) {
       dayState = state;
+      Debug.LogFormat("game state: {0}", state);
    }
    
    // TODO: make this do something
@@ -89,6 +108,7 @@ public class GameController : MonoBehaviour
    void accept() {
       int value = (currentCustomer.getPackage().isLegit() ) ? +15 : +10;
       changeHappiness(value);
+      // change funds
       
       customerIndex++;
       newCustomer();
@@ -154,9 +174,9 @@ public class GameController : MonoBehaviour
       else if (Input.GetKeyDown(denyKey)) {
          selectedAction = Action.DENY;
       }
-      else if (Input.GetKeyDown(inspectKey)) {
-         selectedAction = Action.INSPECT;
-      }
+      // else if (Input.GetKeyDown(inspectKey)) {
+      //    selectedAction = Action.INSPECT;
+      // }
 
       switch (selectedAction) {
          case Action.ACCEPT:
@@ -165,9 +185,9 @@ public class GameController : MonoBehaviour
          case Action.DENY:
             deny();
             break;
-         case Action.INSPECT:
-            inspect();
-            break;
+         // case Action.INSPECT:
+         //    inspect();
+         //    break;
       }
 
       if(customerIndex == customersForDay[currentDay].Count){
