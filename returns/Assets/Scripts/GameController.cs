@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
 
    int currentDay;
    int customerIndex;
+   GameObject currentCustomerObject;
+   GameObject currentPackageObject;
    Customer currentCustomer;
    DayState dayState;
 
@@ -45,7 +47,6 @@ public class GameController : MonoBehaviour
    // TODO: update happiness icons
    void changeHappiness(int value) {
       happiness += value;
-      Debug.LogFormat("current happiness: {0}", happiness);
    }
    void changeFunds(int value){
       funds += value;
@@ -57,38 +58,36 @@ public class GameController : MonoBehaviour
    
    // TODO: make this do something
    void newCustomer(){
-      Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
-      Instantiate(days[currentDay].customers[customerIndex].package.gameObject, transform);
+      currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
+      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].package.gameObject, transform);
+   }
+   void endCustomer(){
+      Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
+
+      Destroy(currentCustomerObject);
+      Destroy(currentPackageObject);
+
+      customerIndex++;
+      if(customerIndex != days[currentDay].customers.Count){
+         newCustomer();
+      } else {
+         changeDayState(DayState.DAY_END);
+      }
    }
    void accept() {
+      Debug.LogFormat("Package {0} accepted", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
       changeHappiness(value);
       changeFunds(-10);
-
-      Debug.LogFormat("package {0} accepted, happiness {1}, funds {2}", customerIndex, happiness, funds);
-      customerIndex++;
-
-      // if(customerIndex != days[currentDay].customers.Count){
-         
-      // } else {
-      //    changeDayState(DayState.DAY_END);
-      // }
+      endCustomer();
    }
    void deny() {
+      Debug.LogFormat("package {0} denied", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? -15 : -10;
       changeHappiness(value);
-
-      Debug.LogFormat("package {0} denied, happiness {1}", customerIndex, happiness);
-      // Destroy(days[currentDay].customers[customerIndex].gameObject);
-
-      customerIndex++;
-
-      // if(customerIndex != days[currentDay].customers.Count){
-         
-      // } else {
-      //    changeDayState(DayState.DAY_END);
-      // }
+      endCustomer();
    }
+
    void back(){
 
    }
@@ -159,21 +158,17 @@ public class GameController : MonoBehaviour
          //    inspect();
          //    break;
       }
-
-      if(customerIndex == days[currentDay].customers.Count){
-         changeDayState(DayState.DAY_END);
-      }
    }
    void dayEnd(){
       Debug.LogFormat("Day {0} end", currentDay);
 
-      if(currentDay == days.Count){
+      if(currentDay+1 != days.Count){
+         currentDay++;
+         changeDayState(DayState.DAY_BEGIN);
+      }else{
          Debug.LogFormat("Game end");
          UnityEditor.EditorApplication.isPlaying = false;
       }
-
-      currentDay++;
-      changeDayState(DayState.DAY_BEGIN);
    }
 
    // --- Start --- //
