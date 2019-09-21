@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
    enum DayState {
       DAY_BEGIN,
       RETURNS,
+      INSPECT,
       DAY_END,
    }
    enum Action {
@@ -18,30 +19,38 @@ public class GameController : MonoBehaviour
    }
 
    // --- member vars --- //
+   const int UP = -1;
+   const int DOWN = 1;
+
+   int currentDay;
+   int customerIndex;
+   GameObject currentCustomerObject;
+   GameObject currentPackageObject;
+   Customer currentCustomer;
+   DayState dayState;
+
+   // serialized vars
+   [SerializeField]
+   int funds;
+   [SerializeField]
+   int happiness;
+   [SerializeField]
+   List<Day> days;
+
    public string acceptKey = "A";
    public string denyKey = "D";
    public string inspectKey = "I";
    public string backKey = "B";
-   const int UP = -1;
-   const int RIGHT = 1;
 
-   int funds;
-   int happiness;
-   DayState dayState;
-
-   int currentDay;
-   int customerIndex;
-   public Customer currentCustomer;
-
-   [SerializeField]
-   List<Day> days;
-
+   
    // --- functions --- //
 
    // TODO: update happiness icons
    void changeHappiness(int value) {
       happiness += value;
-      Debug.LogFormat("current happiness: {0}", happiness);
+   }
+   void changeFunds(int value){
+      funds += value;
    }
    void changeDayState(DayState state) {
       dayState = state;
@@ -50,77 +59,39 @@ public class GameController : MonoBehaviour
    
    // TODO: make this do something
    void newCustomer(){
+      currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
+      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].package.gameObject, transform);
+   }
+   void endCustomer(){
+      Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
 
+      Destroy(currentCustomerObject);
+      Destroy(currentPackageObject);
+
+      customerIndex++;
+      if(customerIndex != days[currentDay].customers.Count){
+         newCustomer();
+      } else {
+         changeDayState(DayState.DAY_END);
+      }
    }
    void accept() {
+      Debug.LogFormat("Package {0} accepted", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
       changeHappiness(value);
-      // change funds
-      
-      customerIndex++;
-      newCustomer();
+      changeFunds(-10);
+      endCustomer();
    }
    void deny() {
+      Debug.LogFormat("package {0} denied", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? -15 : -10;
       changeHappiness(value);
-
-      customerIndex++;
-      newCustomer();
+      endCustomer();
    }
-   void back(){
-
-   }
-   void inspect() {
-
-      // rotate
-      int direction = 0;
-      if(Input.GetKeyDown(KeyCode.RightArrow)){
-         direction += RIGHT;
-      } 
-      if(Input.GetKeyDown(KeyCode.LeftArrow)){
-         direction += UP;
-      }
-      currentCustomer.package.rotate(direction);
-      
-      // accept/deny/back
-      Action selectedAction = Action.NONE;
-      if (Input.GetKeyDown(acceptKey)) {
-         selectedAction = Action.ACCEPT;
-      } 
-      else if(Input.GetKeyDown(denyKey)){
-         selectedAction = Action.DENY;
-      } 
-      else if(Input.GetKeyDown(backKey)){
-         selectedAction = Action.BACK;
-      }
-
-      switch(selectedAction){
-         case Action.ACCEPT:
-            accept();
-            break;
-         case Action.DENY:
-            deny();
-            break;
-         case Action.BACK:
-            back();
-            break;
-      }
-   }
-   void rotate(int direction)
-   {
-      switch (direction)
-      {
-         case UP:
-            // change the sprite
-            break;
-         case DOWN:
-            // change the sprite
-            break;
-      }
-   }
-
 
    void dayBegin() {
+      Debug.LogFormat("Day {0} begin", currentDay);
+   
       customerIndex = 0;
       currentCustomer = days[currentDay].customers[customerIndex];
       changeDayState(DayState.RETURNS);
@@ -128,48 +99,55 @@ public class GameController : MonoBehaviour
    void returns() {
       Action selectedAction = Action.NONE;
 
-      if (Input.GetKeyDown(acceptKey)) {
-         selectedAction = Action.ACCEPT;
+      if (Input.GetKeyDown(KeyCode.A)) {
+         accept();
+      } else if (Input.GetKeyDown(KeyCode.D)) {
+         deny();
+      } else if (Input.GetKeyDown(inspectKey)) {
+         changeDayState(DayState.INSPECT);
       }
-      else if (Input.GetKeyDown(denyKey)) {
-         selectedAction = Action.DENY;
-      }
-      // else if (Input.GetKeyDown(inspectKey)) {
-      //    selectedAction = Action.INSPECT;
-      // }
+   }
+   void inspect() {
 
-      switch (selectedAction) {
-         case Action.ACCEPT:
-            accept();
-            break;
-         case Action.DENY:
-            deny();
-            break;
-         // case Action.INSPECT:
-         //    inspect();
-         //    break;
+      // rotate
+      int direction = 0;
+      if(Input.GetKeyDown(KeyCode.UpArrow)){
+         direction += DOWN;
+      } 
+      if(Input.GetKeyDown(KeyCode.DownArrow)){
+         direction += UP;
       }
 
-      if(customerIndex == days[currentDay].customers.Count){
-         changeDayState(DayState.DAY_END);
+      if(Input.GetKeyDown(KeyCode.B)){
+         changeDayState(DayState.RETURNS);
       }
    }
    void dayEnd(){
+      Debug.LogFormat("Day {0} end", currentDay);
 
-      changeDayState(DayState.DAY_BEGIN);
+      if(currentDay+1 != days.Count){
+         currentDay++;
+         changeDayState(DayState.DAY_BEGIN);
+      }else{
+         Debug.LogFormat("Game end");
+         UnityEditor.EditorApplication.isPlaying = false;
+      }
    }
 
    // --- Start --- //
    void Start() {
+      customerIndex = 0;
+      newCustomer();
+
       currentDay = 0;
       funds = 100;
       happiness = 100;
       dayState = DayState.DAY_BEGIN;
    }
 
-
    // --- Update --- //
    void Update() {
+
       switch (dayState)
       {
          case DayState.DAY_BEGIN:
@@ -177,6 +155,9 @@ public class GameController : MonoBehaviour
             break;
          case DayState.RETURNS:
             returns();
+            break;
+         case DayState.INSPECT:
+            inspect();
             break;
          case DayState.DAY_END:
             dayEnd();

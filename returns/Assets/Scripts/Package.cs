@@ -7,7 +7,7 @@ using UnityEngine;
 public class Package : ScriptableObject
 {
    public bool legit;
-   public string descsription;
+   public string description;
    public GameObject gameObject;
 
    const int UP = 1;
