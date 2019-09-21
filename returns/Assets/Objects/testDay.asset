@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: testDay
   m_EditorClassIdentifier: 
   index: 0
-  customers: []
+  customers:
+  - {fileID: 11400000, guid: 9d36470234798402ab6f0d93508efa72, type: 2}

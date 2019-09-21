@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7f85b3e4cb3b492997f61937114effc, type: 3}
-  m_Name: PotatoPete
+  m_Name: testCustomer
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  gameObject: {fileID: 929161475433499048, guid: 5b226d61e479740d787b74ae8f84a94c,
+    type: 3}
   recipt: {fileID: 0}
-  package: {fileID: 0}
-  dialouge: 
+  package: {fileID: 11400000, guid: 7c830a24750db403b963d8b361cbc78c, type: 2}
+  introDialouge: 
+  acceptDialouge: 
+  denyDialouge: 
