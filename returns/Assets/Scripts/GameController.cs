@@ -178,7 +178,6 @@ public class GameController : MonoBehaviour
 
       changeDayState(DayState.DAY_BEGIN);
    }
-   
 
    // --- Start --- //
    void Start() {
