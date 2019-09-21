@@ -62,21 +62,21 @@ public class GameController : MonoBehaviour
       }
    }
    
-   void accept() {
+   public void accept() {
       Debug.LogFormat("Package {0} accepted", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
       changeHappiness(value);
       changeFunds(-10);
       endCustomer();
    }
-   void deny() {
+   public void deny() {
       Debug.LogFormat("package {0} denied", customerIndex);
       int value = (currentCustomer.package.isLegit() ) ? -15 : -10;
       changeHappiness(value);
       endCustomer();
    }
    // TODO: make this work
-   void inspect() {
+   public void inspect() {
       Debug.LogFormat("You opened the box, description: {0}", currentCustomer.package.description);
    }
 
