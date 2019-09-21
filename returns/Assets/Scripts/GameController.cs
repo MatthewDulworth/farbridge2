@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
    enum DayState {
       DAY_BEGIN,
       RETURNS,
+      INSPECT,
       DAY_END,
    }
    enum Action {
@@ -88,45 +89,6 @@ public class GameController : MonoBehaviour
       endCustomer();
    }
 
-   void back(){
-
-   }
-   void inspect() {
-
-      // rotate
-      int direction = 0;
-      if(Input.GetKeyDown(KeyCode.UpArrow)){
-         direction += DOWN;
-      } 
-      if(Input.GetKeyDown(KeyCode.DownArrow)){
-         direction += UP;
-      }
-      
-      // accept/deny/back
-      Action selectedAction = Action.NONE;
-      if (Input.GetKeyDown(acceptKey)) {
-         selectedAction = Action.ACCEPT;
-      } 
-      else if(Input.GetKeyDown(denyKey)){
-         selectedAction = Action.DENY;
-      } 
-      else if(Input.GetKeyDown(backKey)){
-         selectedAction = Action.BACK;
-      }
-
-      switch(selectedAction){
-         case Action.ACCEPT:
-            accept();
-            break;
-         case Action.DENY:
-            deny();
-            break;
-         case Action.BACK:
-            back();
-            break;
-      }
-   }
-
    void dayBegin() {
       Debug.LogFormat("Day {0} begin", currentDay);
    
@@ -138,25 +100,26 @@ public class GameController : MonoBehaviour
       Action selectedAction = Action.NONE;
 
       if (Input.GetKeyDown(KeyCode.A)) {
-         selectedAction = Action.ACCEPT;
+         accept();
+      } else if (Input.GetKeyDown(KeyCode.D)) {
+         deny();
+      } else if (Input.GetKeyDown(inspectKey)) {
+         changeDayState(DayState.INSPECT);
       }
-      else if (Input.GetKeyDown(KeyCode.D)) {
-         selectedAction = Action.DENY;
-      }
-      // else if (Input.GetKeyDown(inspectKey)) {
-      //    selectedAction = Action.INSPECT;
-      // }
+   }
+   void inspect() {
 
-      switch (selectedAction) {
-         case Action.ACCEPT:
-            accept();
-            break;
-         case Action.DENY:
-            deny();
-            break;
-         // case Action.INSPECT:
-         //    inspect();
-         //    break;
+      // rotate
+      int direction = 0;
+      if(Input.GetKeyDown(KeyCode.UpArrow)){
+         direction += DOWN;
+      } 
+      if(Input.GetKeyDown(KeyCode.DownArrow)){
+         direction += UP;
+      }
+
+      if(Input.GetKeyDown(KeyCode.B)){
+         changeDayState(DayState.RETURNS);
       }
    }
    void dayEnd(){
@@ -192,6 +155,9 @@ public class GameController : MonoBehaviour
             break;
          case DayState.RETURNS:
             returns();
+            break;
+         case DayState.INSPECT:
+            inspect();
             break;
          case DayState.DAY_END:
             dayEnd();
