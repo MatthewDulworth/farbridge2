@@ -4,59 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-   // --- classes --- //
-   [System.Serializable]
-   public class Package {
-
-      [SerializeField]
-      bool legit;
-
-      [SerializeField]
-      string descsription;
-
-      [SerializeField]
-      GameObject gameObject;
-
-      public bool isLegit() {
-         return legit;
-      }
-      public bool displayText(){
-         return true;
-      }
-      public void rotate(int direction){
-         switch(direction){
-            case RIGHT:
-               break;
-            case LEFT:
-               break;
-         }
-      }
-   }
-   
-   [System.Serializable]
-   public class Customer {
-      [SerializeField]
-      GameObject gameObject;
-
-      [SerializeField]
-      GameObject recipt;
-
-      [SerializeField]
-      Package package;
-
-      [SerializeField]
-      string dialouge;
-
-      public Package getPackage() {
-         return package;
-      }
-   }
-
-   [System.Serializable]
-   public class Manager {
-      string positiveDialouge;
-      string gameEndDialouge;
-   }
    enum DayState {
       DAY_BEGIN,
       RETURNS,
@@ -70,24 +17,24 @@ public class GameController : MonoBehaviour
       NONE
    }
 
-
    // --- member vars --- //
    public string acceptKey = "A";
    public string denyKey = "D";
    public string inspectKey = "I";
    public string backKey = "B";
-   const int LEFT = -1;
+   const int UP = -1;
    const int RIGHT = 1;
 
    int funds;
    int happiness;
    DayState dayState;
 
-   const int days = 3;
    int currentDay;
    int customerIndex;
    public Customer currentCustomer;
-   List<Customer>[] customersForDay;
+
+   [SerializeField]
+   List<Day> days;
 
    // --- functions --- //
 
@@ -106,7 +53,7 @@ public class GameController : MonoBehaviour
 
    }
    void accept() {
-      int value = (currentCustomer.getPackage().isLegit() ) ? +15 : +10;
+      int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
       changeHappiness(value);
       // change funds
       
@@ -114,7 +61,7 @@ public class GameController : MonoBehaviour
       newCustomer();
    }
    void deny() {
-      int value = (currentCustomer.getPackage().isLegit() ) ? -15 : -10;
+      int value = (currentCustomer.package.isLegit() ) ? -15 : -10;
       changeHappiness(value);
 
       customerIndex++;
@@ -126,14 +73,14 @@ public class GameController : MonoBehaviour
    void inspect() {
 
       // rotate
-      int rotateDirection = 0;
+      int direction = 0;
       if(Input.GetKeyDown(KeyCode.RightArrow)){
-         rotateDirection += RIGHT;
+         direction += RIGHT;
       } 
       if(Input.GetKeyDown(KeyCode.LeftArrow)){
-         rotateDirection += LEFT;
+         direction += UP;
       }
-      currentCustomer.getPackage().rotate(rotateDirection);
+      currentCustomer.package.rotate(direction);
       
       // accept/deny/back
       Action selectedAction = Action.NONE;
@@ -159,10 +106,23 @@ public class GameController : MonoBehaviour
             break;
       }
    }
+   void rotate(int direction)
+   {
+      switch (direction)
+      {
+         case UP:
+            // change the sprite
+            break;
+         case DOWN:
+            // change the sprite
+            break;
+      }
+   }
+
 
    void dayBegin() {
       customerIndex = 0;
-      currentCustomer = customersForDay[currentDay][customerIndex];
+      currentCustomer = days[currentDay].customers[customerIndex];
       changeDayState(DayState.RETURNS);
    }
    void returns() {
@@ -190,7 +150,7 @@ public class GameController : MonoBehaviour
          //    break;
       }
 
-      if(customerIndex == customersForDay[currentDay].Count){
+      if(customerIndex == days[currentDay].customers.Count){
          changeDayState(DayState.DAY_END);
       }
    }
@@ -201,11 +161,6 @@ public class GameController : MonoBehaviour
 
    // --- Start --- //
    void Start() {
-      customersForDay = new List<Customer>[days];
-      for (int i = 0; i < days; i++) {
-         customersForDay[i] = new List<Customer>();
-      }
-
       currentDay = 0;
       funds = 100;
       happiness = 100;
