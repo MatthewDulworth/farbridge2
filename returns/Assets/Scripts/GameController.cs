@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
       changeHappiness(value);
       changeFunds(-10);
 
-      Debug.LogFormat("package {0} accepted, happiness {1}", customerIndex, happiness);
+      Debug.LogFormat("package {0} accepted, happiness {1}, funds {2}", customerIndex, happiness, funds);
       customerIndex++;
 
       // if(customerIndex != days[currentDay].customers.Count){
