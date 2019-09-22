@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0978943933ff640de938b2d3d4136a91, type: 3}
-  m_Name: testPackage
+  m_Script: {fileID: 11500000, guid: d7f85b3e4cb3b492997f61937114effc, type: 3}
+  m_Name: Potato Pete
   m_EditorClassIdentifier: 
-  legit: 0
-  description: 
   gameObject: {fileID: 0}
+  recipt: {fileID: 0}
+  package: {fileID: 0}
+  introDialouge: Howdy spud! This should be appealing.
+  acceptDialouge: Thank spud. My ship hash come in!
+  denyDialouge: Tuberd. Looks like we got off to a bad starch.
