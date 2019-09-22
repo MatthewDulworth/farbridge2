@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -16,18 +17,18 @@ public class GameController : MonoBehaviour
 
    int currentDay;
    int customerIndex;
-   GameObject currentCustomerObject;
-   GameObject currentPackageObject;
    Customer currentCustomer;
    State dayState;
 
    // serialized vars
-   [SerializeField]
-   int funds;
-   [SerializeField]
-   int happiness;
-   [SerializeField]
-   List<Day> days;
+   [SerializeField] Transform parentCustomer;
+   [SerializeField] Transform parentPackage;
+   [SerializeField] Transform parentRecipt;
+   [SerializeField] Transform descriptionTextBox;
+   [SerializeField] Transform dialougeTextBox;
+   [SerializeField] int funds;
+   [SerializeField] int happiness;
+   [SerializeField] List<Day> days;
    
    // --- functions --- //
 
@@ -45,14 +46,16 @@ public class GameController : MonoBehaviour
    
    void newCustomer(){
       currentCustomer = days[currentDay].customers[customerIndex];
-      currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
-      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, transform);
+      Instantiate(days[currentDay].customers[customerIndex].gameObject, parentCustomer);
+      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, parentPackage);
+      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.receipt.gameObject, parentRecipt);
    }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
 
-      Destroy(currentCustomerObject);
-      Destroy(currentPackageObject);
+      Destroy(parentCustomer.GetChild(0));
+      Destroy(parentPackage.GetChild(0));
+      Destroy(parentRecipt.GetChild(0));
 
       customerIndex++;
       if(customerIndex != days[currentDay].customers.Count){
