@@ -61,6 +61,7 @@ public class GameController : MonoBehaviour
       receiptImage.sprite = days[currentDay].customers[customerIndex].returnedGoods.receipt;
 
       dialougeTextBox.text = currentCustomer.introDialouge;
+      AudioControl.playCharecterTheme(currentCustomer);
    }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
