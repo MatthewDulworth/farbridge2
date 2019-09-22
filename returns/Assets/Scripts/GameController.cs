@@ -17,8 +17,13 @@ public class GameController : MonoBehaviour
 
    int currentDay;
    int customerIndex;
+   int wins;
+   int funds;
+   int happiness;
+   int totalCustomers;
    Customer currentCustomer;
    State dayState;
+
 
    // serialized vars
    [SerializeField] GameObject parentCustomer;
@@ -28,9 +33,8 @@ public class GameController : MonoBehaviour
    [SerializeField] GameObject dialougeTextBox;
    [SerializeField] GameObject returnsParent;
    [SerializeField] GameObject inspectParent;
-   [SerializeField] int funds;
-   [SerializeField] int happiness;
    [SerializeField] List<Day> days;
+   
    
    // --- functions --- //
 
@@ -131,16 +135,18 @@ public class GameController : MonoBehaviour
    void dayEnd(){
       Debug.LogFormat("Day {0} end, happiness {1}, funds{2}", currentDay, happiness, funds);
 
-      if(happiness <= 0 || funds <=0) {
-         loseGame();
-      } 
-      else if(currentDay+1 != days.Count) {
+      
+      if(currentDay+1 != days.Count) {
          currentDay++;
          managerPositive();
          changeDayState(State.DAY_BEGIN);
       }
       else{
-         winGame();
+         if(wins == totalCustomers) {
+            winGame();
+         } else{
+            loseGame();
+         } 
       }
    }
 
@@ -149,6 +155,11 @@ public class GameController : MonoBehaviour
       customerIndex = 0;
       currentDay = 0;
       dayState = State.DAY_BEGIN;
+
+      totalCustomers = 0;
+      for(int i=0; i<days.Count; i++){
+         totalCustomers += days[i].customers.Count;
+      } 
    }
 
    // --- Update --- //
