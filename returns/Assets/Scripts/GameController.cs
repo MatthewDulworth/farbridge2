@@ -53,8 +53,10 @@ public class GameController : MonoBehaviour
    void newCustomer(){
       currentCustomer = days[currentDay].customers[customerIndex];
       Instantiate(days[currentDay].customers[customerIndex].gameObject, parentCustomer.transform);
-      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, parentPackage.transform);
-      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.receipt.gameObject, parentRecipt.transform);
+      //Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, parentPackage.transform);
+      //Instantiate(days[currentDay].customers[customerIndex].returnedGoods.receipt.gameObject, parentRecipt.transform);
+
+      
    }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
@@ -88,7 +90,7 @@ public class GameController : MonoBehaviour
    public void inspect() {
       returnsParent.SetActive(false);
       inspectParent.SetActive(true);
-      Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.package.getDescription());
+      //Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.package.getDescription());
    }
    public void back(){
       returnsParent.SetActive(true);
