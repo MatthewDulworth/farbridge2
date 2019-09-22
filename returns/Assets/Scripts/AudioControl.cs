@@ -37,14 +37,8 @@ public class AudioControl : MonoBehaviour
    
    public static void playCharecterTheme(Customer customer)
    {
-      // charecterTheme.clip = customer.theme;
-      // if(charecterTheme.clip != null)
-      // {
-      //    FadeOut(mainTheme, fadeTime);
-      //    FadeIn(charecterTheme, fadeTime);
-      // }
-
       charecterTheme.clip = customer.theme;
+      mainTheme.Stop();
       charecterTheme.Play();
    }
 
@@ -53,21 +47,13 @@ public class AudioControl : MonoBehaviour
       mainTheme = MainTheme;
       charecterTheme = CharecterTheme;
       soundEffect = SoundEffect;
-      mainTheme.Stop();
+      mainTheme.Play();
    }
    void Update()
    {
-      // mainTheme.loop = true;
-
-      // if(charecterTheme.clip != null){
-      //    if(!charecterTheme.isPlaying){
-      //       FadeIn(mainTheme, fadeTime);
-      //    }
-      // } else{
-      //    if(!mainTheme.isPlaying){
-      //       FadeIn(mainTheme, fadeTime);
-      //    }
-      // }
-
+      mainTheme.loop = true;
+      if(!charecterTheme.isPlaying){
+         mainTheme.Play();
+      }
    }
 }
