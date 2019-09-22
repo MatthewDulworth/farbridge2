@@ -119,7 +119,7 @@ public class GameController : MonoBehaviour
    }
    void loseGame(){
       Debug.LogFormat("You lose");
-      AudioControl.playJoeMamaMusic();
+      AudioControl.playLoseMusic();
       LoseGame.Invoke();
    }
    void winGame(){
