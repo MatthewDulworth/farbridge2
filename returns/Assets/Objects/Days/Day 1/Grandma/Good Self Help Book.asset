@@ -15,6 +15,7 @@ MonoBehaviour:
   legit: 1
   receipt: {fileID: 21300000, guid: f2f27456675c4b347964845da2e3cefb, type: 3}
   package: {fileID: 21300000, guid: 183ba8dbf08f5fd4fa1e210062485431, type: 3}
+  soundEffect: {fileID: 8300000, guid: 480dfc53604786945bd8d88f90426309, type: 3}
   descriptions:
   - You can tell that this is an exclusive print edition for Super Saver Club because
     the book was printed backward.
