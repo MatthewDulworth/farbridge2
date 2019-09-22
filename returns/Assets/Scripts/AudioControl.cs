@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
-   [SerializeField] static AudioSource mainTheme;
-   [SerializeField] static AudioSource charecterTheme;
-   [SerializeField] static AudioSource soundEffect;
-   [SerializeField] static int fadeTime;
+   [SerializeField] AudioSource MainTheme;
+   [SerializeField] int FadeTime;
+
+   static AudioSource mainTheme;
+   static AudioSource charecterTheme;
+   static AudioSource soundEffect;
+   static int fadeTime;
 
    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
    {
@@ -42,6 +45,7 @@ public class AudioControl : MonoBehaviour
 
    void Start()
    {
+      mainTheme = MainTheme;
       mainTheme.Play();
    }
    void Update()
