@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class GameController : MonoBehaviour
    [SerializeField] List<Day> days;
    [SerializeField] Image packageImage;
    [SerializeField] Image receiptImage;
+   [SerializeField] float waitTime;
+   [SerializeField] UnityEvent CustomerLeaves;
+   [SerializeField] UnityEvent CustomerEnters;
+
    
    
    // --- functions --- //
@@ -54,6 +59,7 @@ public class GameController : MonoBehaviour
    }
    
    void newCustomer(){
+      CustomerEnters.Invoke();
       currentCustomer = days[currentDay].customers[customerIndex];
       Instantiate(days[currentDay].customers[customerIndex].gameObject, parentCustomer.transform);
 
@@ -63,7 +69,10 @@ public class GameController : MonoBehaviour
       dialougeTextBox.text = currentCustomer.introDialouge;
       AudioControl.playCharecterTheme(currentCustomer);
    }
-   void endCustomer(){
+   IEnumerator endCustomer(){
+      CustomerLeaves.Invoke();
+      yield return new WaitForSeconds(waitTime);
+
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
       Destroy(parentCustomer.transform.GetChild(0).gameObject);
       customerIndex++;
@@ -76,24 +85,19 @@ public class GameController : MonoBehaviour
    
    public void accept() {
       Debug.LogFormat("Package {0} accepted", customerIndex);
-
       if(currentCustomer.returnedGoods.legit){
-         dialougeTextBox.text = currentCustomer.acceptDialouge;
          wins++;
-      } else{
-         dialougeTextBox.text = currentCustomer.denyDialouge;
-      }
-      endCustomer();
+      } 
+      dialougeTextBox.text = currentCustomer.acceptDialouge;
+      StartCoroutine(endCustomer());
    }
    public void deny() {
       Debug.LogFormat("package {0} denied", customerIndex);
-      if(currentCustomer.returnedGoods.legit){
-         dialougeTextBox.text = currentCustomer.acceptDialouge;
-      } else{
+      if(!currentCustomer.returnedGoods.legit){
          wins++;
-         dialougeTextBox.text = currentCustomer.denyDialouge;
       }
-      endCustomer();
+      dialougeTextBox.text = currentCustomer.denyDialouge;
+     StartCoroutine(endCustomer());
    }
    // TODO: make this work
    public void inspect() {
