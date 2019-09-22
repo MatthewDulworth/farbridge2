@@ -52,7 +52,7 @@ public class AudioControl : MonoBehaviour
    void Update()
    {
       mainTheme.loop = true;
-      if(!charecterTheme.isPlaying){
+      if(!charecterTheme.isPlaying && !mainTheme.isPlaying){
          mainTheme.Play();
       }
    }
