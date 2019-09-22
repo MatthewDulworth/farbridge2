@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 1965197780}
   - component: {fileID: 1965197782}
   - component: {fileID: 1965197781}
+  - component: {fileID: 1965197783}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -574,7 +575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 498.9, y: 423.6}
+  m_AnchoredPosition: {x: 515.8, y: 423.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1965197781
@@ -597,8 +598,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 21d7d83c18460a443908b04d260f708d, type: 2}
+  m_sharedMaterial: {fileID: 7484965601187526164, guid: 21d7d83c18460a443908b04d260f708d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -623,8 +625,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -640,7 +642,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -661,7 +663,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -39.600372, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1965197781}
     characterCount: 1
@@ -695,6 +697,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965197779}
   m_CullTransparentMesh: 0
+--- !u!132 &1965197783
+GUIText:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965197779}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: f742105432da3fe458d758fffba97b00, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &1999171024
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +871,7 @@ PrefabInstance:
     - target: {fileID: 2136551961296186628, guid: 563cf7d884e930e42afe44efa2ff1e71,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1015
+      value: -559
       objectReference: {fileID: 0}
     - target: {fileID: 2136551961296186628, guid: 563cf7d884e930e42afe44efa2ff1e71,
         type: 3}
