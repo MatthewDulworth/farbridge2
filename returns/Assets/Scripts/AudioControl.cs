@@ -7,11 +7,15 @@ public class AudioControl : MonoBehaviour
    [SerializeField] AudioSource MainTheme;
    [SerializeField] AudioSource CharecterTheme;
    [SerializeField] AudioSource SoundEffect;
+   [SerializeField] AudioSource JoeMama;
+   [SerializeField] AudioSource LoseMusic;
    [SerializeField] int FadeTime;
 
    static AudioSource mainTheme;
    static AudioSource charecterTheme;
    static AudioSource soundEffect;
+   static AudioSource joeMama;
+   static AudioSource loseMusic;
    static int fadeTime;
 
    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime){
@@ -32,6 +36,18 @@ public class AudioControl : MonoBehaviour
          yield return null;
       }
    }
+
+   public static void playJoeMamaMusic(){
+      mainTheme.Stop();
+      charecterTheme.Stop();
+      joeMama.Play();
+   }
+
+   public static void playLoseMusic(){
+      mainTheme.Stop();
+      charecterTheme.Stop();
+      loseMusic.Play();
+   }
    
    public static void playCharecterTheme(Customer customer){
       charecterTheme.clip = customer.theme;
@@ -44,11 +60,14 @@ public class AudioControl : MonoBehaviour
       soundEffect.Play();
    }
 
+
    void Start()
    {
       mainTheme = MainTheme;
       charecterTheme = CharecterTheme;
       soundEffect = SoundEffect;
+      joeMama = JoeMama;
+      loseMusic = LoseMusic;
       mainTheme.Play();
    }
    void Update()

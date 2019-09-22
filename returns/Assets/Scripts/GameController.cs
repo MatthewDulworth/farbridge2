@@ -41,7 +41,8 @@ public class GameController : MonoBehaviour
    [SerializeField] float waitTime;
    [SerializeField] UnityEvent CustomerLeaves;
    [SerializeField] UnityEvent CustomerEnters;
-
+   [SerializeField] UnityEvent WinGame;
+   [SerializeField] UnityEvent LoseGame;
    
    
    // --- functions --- //
@@ -117,23 +118,15 @@ public class GameController : MonoBehaviour
       // the manager has some positive dialouge
    }
    void loseGame(){
-      // the manager has some negative dialouge
       Debug.LogFormat("You lose");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
+      AudioControl.playJoeMamaMusic();
+      LoseGame.Invoke();
+   }
    void winGame(){
-      // the manager has some positive dialouge
       Debug.LogFormat("You win");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
+      AudioControl.playJoeMamaMusic();
+      WinGame.Invoke();
+   }
    void joeMama(){
       // joe mama ending
    }
@@ -203,3 +196,10 @@ public class GameController : MonoBehaviour
       }
    }
 }
+
+
+// #if UNITY_EDITOR
+//         UnityEditor.EditorApplication.isPlaying = false;
+// #else
+//         Application.Quit();
+// #endif
