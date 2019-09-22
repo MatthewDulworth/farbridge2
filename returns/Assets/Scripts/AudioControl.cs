@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
-   [SerializeField] static AudioSource MainTheme;
+   [SerializeField] static AudioSource mainTheme;
+   [SerializeField] static AudioSource charecterTheme;
+   [SerializeField] static AudioSource soundEffect;
+   [SerializeField] static int fadeTime;
+
    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
    {
       float startVolume = audioSource.volume;
@@ -25,23 +29,33 @@ public class AudioControl : MonoBehaviour
          yield return null;
       }
    }
-
+   
    public static void playCharecterTheme(Customer customer)
    {
-      if(customer.theme != null)
+      charecterTheme.clip = customer.theme;
+      if(charecterTheme.clip != null)
       {
-         FadeOut(MainTheme, 2);
-         //FadeIn(customer.theme, 2);
-         //customer.theme.Play();
+         FadeOut(mainTheme, fadeTime);
+         FadeIn(charecterTheme, fadeTime);
       }
    }
 
    void Start()
    {
-      
+      mainTheme.Play();
    }
    void Update()
    {
+      mainTheme.loop = true;
 
+      if(charecterTheme.clip != null){
+         if(!charecterTheme.isPlaying){
+            FadeIn(mainTheme, fadeTime);
+         }
+      } else{
+         if(!mainTheme.isPlaying){
+            FadeIn(mainTheme, fadeTime);
+         }
+      }
    }
 }
