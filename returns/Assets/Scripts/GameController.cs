@@ -114,14 +114,22 @@ public class GameController : MonoBehaviour
    void loseGame(){
       // the manager has some negative dialouge
       Debug.LogFormat("You lose");
-      UnityEditor.EditorApplication.isPlaying = false;
-   }
-   void winGame(){
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    void winGame(){
       // the manager has some positive dialouge
       Debug.LogFormat("You win");
-      UnityEditor.EditorApplication.isPlaying = false;
-   }
-   void joeMama(){
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    void joeMama(){
       // joe mama ending
    }
 
