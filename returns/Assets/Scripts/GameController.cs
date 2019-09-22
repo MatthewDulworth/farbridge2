@@ -97,13 +97,11 @@ public class GameController : MonoBehaviour
    }
    // TODO: make this work
    public void inspect() {
-      returnsParent.SetActive(false);
-      inspectParent.SetActive(true);
+      dialougeTextBox.text = currentCustomer.returnedGoods.package.description;
       Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.getDescription());
     }
    public void back(){
-      returnsParent.SetActive(true);
-      inspectParent.SetActive(false);
+
       Debug.LogFormat("You closed the box");
    }
 
