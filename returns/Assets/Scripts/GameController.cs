@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
    void newCustomer(){
       currentCustomer = days[currentDay].customers[customerIndex];
       currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
-      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].package.gameObject, transform);
+      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, transform);
    }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
@@ -64,20 +64,20 @@ public class GameController : MonoBehaviour
    
    public void accept() {
       Debug.LogFormat("Package {0} accepted", customerIndex);
-      int value = (currentCustomer.package.isLegit() ) ? +15 : +10;
+      int value = (currentCustomer.returnedGoods.legit) ? 15 : 10;
       changeHappiness(value);
       changeFunds(-10);
       endCustomer();
    }
    public void deny() {
       Debug.LogFormat("package {0} denied", customerIndex);
-      int value = (currentCustomer.package.isLegit() ) ? -15 : -10;
+      int value = (currentCustomer.returnedGoods.legit) ? -15 : -10;
       changeHappiness(value);
       endCustomer();
    }
    // TODO: make this work
    public void inspect() {
-      Debug.LogFormat("You opened the box, description: {0}", currentCustomer.package.description);
+      Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.package.getDescription());
    }
 
    // TODO: make these work
