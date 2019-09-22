@@ -40,12 +40,14 @@ public class AudioControl : MonoBehaviour
    public static void playJoeMamaMusic(){
       mainTheme.Stop();
       charecterTheme.Stop();
+      soundEffect.Stop();
       joeMama.Play();
    }
 
    public static void playLoseMusic(){
       mainTheme.Stop();
       charecterTheme.Stop();
+      soundEffect.Stop();
       loseMusic.Play();
    }
    
