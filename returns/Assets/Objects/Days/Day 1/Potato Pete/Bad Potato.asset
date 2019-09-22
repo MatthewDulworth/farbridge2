@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   legit: 0
   receipt: {fileID: 21300000, guid: 9fefd38e3ae83254e990421fa67a50cd, type: 3}
-  package: {fileID: 21300000, guid: 1948ee20c7672894da921b231a31b176, type: 3}
+  package: {fileID: 21300000, guid: 78e40e1c86f2c0649b7d25e21c4e51b3, type: 3}
   descriptions:
   - "It\u2019s a potato. . . Just a potato."
   - It feels like the potato is moving towards you.

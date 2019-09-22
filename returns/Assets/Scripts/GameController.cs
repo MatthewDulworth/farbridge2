@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -34,8 +35,8 @@ public class GameController : MonoBehaviour
    [SerializeField] GameObject returnsParent;
    [SerializeField] GameObject inspectParent;
    [SerializeField] List<Day> days;
-   [SerializeField] SpriteRenderer packageSprite;
-   [SerializeField] SpriteRenderer receiptSprite;
+   [SerializeField] Image packageImage;
+   [SerializeField] Image receiptImage;
    
    
    // --- functions --- //
@@ -56,8 +57,8 @@ public class GameController : MonoBehaviour
       currentCustomer = days[currentDay].customers[customerIndex];
       Instantiate(days[currentDay].customers[customerIndex].gameObject, parentCustomer.transform);
 
-      packageSprite.sprite = days[currentDay].customers[customerIndex].returnedGoods.package;
-      receiptSprite.sprite = days[currentDay].customers[customerIndex].returnedGoods.receipt;
+      packageImage.sprite = days[currentDay].customers[customerIndex].returnedGoods.package;
+      receiptImage.sprite = days[currentDay].customers[customerIndex].returnedGoods.receipt;
 
       dialougeTextBox.text = currentCustomer.introDialouge;
    }
