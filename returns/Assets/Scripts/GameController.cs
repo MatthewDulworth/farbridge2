@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -16,18 +17,24 @@ public class GameController : MonoBehaviour
 
    int currentDay;
    int customerIndex;
-   GameObject currentCustomerObject;
-   GameObject currentPackageObject;
+   int wins;
+   int funds;
+   int happiness;
+   int totalCustomers;
    Customer currentCustomer;
    State dayState;
 
+
    // serialized vars
-   [SerializeField]
-   int funds;
-   [SerializeField]
-   int happiness;
-   [SerializeField]
-   List<Day> days;
+   [SerializeField] GameObject parentCustomer;
+   [SerializeField] GameObject parentPackage;
+   [SerializeField] GameObject parentRecipt;
+   [SerializeField] GameObject descriptionTextBox;
+   [SerializeField] GameObject dialougeTextBox;
+   [SerializeField] GameObject returnsParent;
+   [SerializeField] GameObject inspectParent;
+   [SerializeField] List<Day> days;
+   
    
    // --- functions --- //
 
@@ -45,14 +52,16 @@ public class GameController : MonoBehaviour
    
    void newCustomer(){
       currentCustomer = days[currentDay].customers[customerIndex];
-      currentCustomerObject = Instantiate(days[currentDay].customers[customerIndex].gameObject, transform);
-      currentPackageObject = Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, transform);
+      Instantiate(days[currentDay].customers[customerIndex].gameObject, parentCustomer.transform);
+      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.package.gameObject, parentPackage.transform);
+      Instantiate(days[currentDay].customers[customerIndex].returnedGoods.receipt.gameObject, parentRecipt.transform);
    }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
 
-      Destroy(currentCustomerObject);
-      Destroy(currentPackageObject);
+      Destroy(parentCustomer.transform.GetChild(0));
+      Destroy(parentPackage.transform.GetChild(0));
+      Destroy(parentRecipt.transform.GetChild(0));
 
       customerIndex++;
       if(customerIndex != days[currentDay].customers.Count){
@@ -77,7 +86,14 @@ public class GameController : MonoBehaviour
    }
    // TODO: make this work
    public void inspect() {
+      returnsParent.SetActive(false);
+      inspectParent.SetActive(true);
       Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.package.getDescription());
+   }
+   public void back(){
+      returnsParent.SetActive(true);
+      inspectParent.SetActive(false);
+      Debug.LogFormat("You closed the box");
    }
 
    // TODO: make these work
@@ -104,6 +120,8 @@ public class GameController : MonoBehaviour
 
       newCustomer();
       changeDayState(State.RETURNS);
+      returnsParent.SetActive(true);
+      inspectParent.SetActive(false);
    }
    void returns() {
       if (Input.GetKeyUp(KeyCode.A)) {
@@ -117,28 +135,31 @@ public class GameController : MonoBehaviour
    void dayEnd(){
       Debug.LogFormat("Day {0} end, happiness {1}, funds{2}", currentDay, happiness, funds);
 
-      if(happiness <= 0 || funds <=0) {
-         loseGame();
-      } 
-      else if(currentDay+1 != days.Count) {
+      
+      if(currentDay+1 != days.Count) {
          currentDay++;
          managerPositive();
          changeDayState(State.DAY_BEGIN);
       }
       else{
-         winGame();
+         if(wins == totalCustomers) {
+            winGame();
+         } else{
+            loseGame();
+         } 
       }
    }
 
    // --- Start --- //
    void Start() {
       customerIndex = 0;
-      newCustomer();
-
       currentDay = 0;
-      funds = 100;
-      happiness = 100;
       dayState = State.DAY_BEGIN;
+
+      totalCustomers = 0;
+      for(int i=0; i<days.Count; i++){
+         totalCustomers += days[i].customers.Count;
+      } 
    }
 
    // --- Update --- //
