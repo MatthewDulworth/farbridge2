@@ -53,7 +53,7 @@ public class AudioControl : MonoBehaviour
       mainTheme = MainTheme;
       charecterTheme = CharecterTheme;
       soundEffect = SoundEffect;
-      // mainTheme.Play();
+      mainTheme.Stop();
    }
    void Update()
    {
