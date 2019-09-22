@@ -15,6 +15,7 @@ MonoBehaviour:
   legit: 0
   receipt: {fileID: 21300000, guid: e548a0a07447d154f95a292bc8526552, type: 3}
   package: {fileID: 21300000, guid: 0cb20d115ee2d2448a7261946e396896, type: 3}
+  soundEffect: {fileID: 8300000, guid: 8e98ec9e11b060c4ca5dc4de2d463359, type: 3}
   descriptions:
   - "You really hope that\u2019s Super Saver Club brand Strawberry Jelly on that knife.
     . ."

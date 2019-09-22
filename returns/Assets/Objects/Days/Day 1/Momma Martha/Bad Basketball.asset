@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bad Basketball
   m_EditorClassIdentifier: 
   legit: 0
-  receipt: {fileID: 21300000, guid: e3fb50ce91621834e9307cf11d003616, type: 3}
-  package: {fileID: 21300000, guid: 32794fd3a3e11ea498d928cc62dbc536, type: 3}
+  receipt: {fileID: 21300000, guid: 32794fd3a3e11ea498d928cc62dbc536, type: 3}
+  package: {fileID: 21300000, guid: e3fb50ce91621834e9307cf11d003616, type: 3}
+  soundEffect: {fileID: 8300000, guid: 75b4746e750e2a44c8055c344f6bf3e0, type: 3}
   descriptions:
   - "Upon closer inspection, you realize that this isn't a Basket Ball at all. It\u2019s
     just an overinflated football."
