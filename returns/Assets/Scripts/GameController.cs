@@ -57,7 +57,10 @@ public class GameController : MonoBehaviour
       dayState = state;
       Debug.LogFormat("game state: {0}", state);
    }
-   
+   public void playPackageSound(){
+      AudioControl.playItemSoundeffect(currentCustomer.returnedGoods);
+   }
+
    void newCustomer(){
       CustomerEnters.Invoke();
       currentCustomer = days[currentDay].customers[customerIndex];

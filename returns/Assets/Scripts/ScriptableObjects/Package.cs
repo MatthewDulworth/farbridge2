@@ -7,9 +7,7 @@ public class Package : ScriptableObject
 {
    public GameObject gameObject;
 
-   [SerializeField]
-   private string[] descriptions;
-
+   [SerializeField] private string[] descriptions;
    const int UP = 1;
    const int DOWN = -1;
 

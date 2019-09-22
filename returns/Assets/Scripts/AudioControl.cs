@@ -14,8 +14,7 @@ public class AudioControl : MonoBehaviour
    static AudioSource soundEffect;
    static int fadeTime;
 
-   public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
-   {
+   public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime){
       float startVolume = audioSource.volume;
       while (audioSource.volume > 0)
       {
@@ -24,8 +23,7 @@ public class AudioControl : MonoBehaviour
       }
       audioSource.Stop();
    }
-   public static IEnumerator FadeIn(AudioSource audioSource, float FadeTime)
-   {
+   public static IEnumerator FadeIn(AudioSource audioSource, float FadeTime){
       audioSource.Play();
       audioSource.volume = 0f;
       while (audioSource.volume < 1)
@@ -35,11 +33,15 @@ public class AudioControl : MonoBehaviour
       }
    }
    
-   public static void playCharecterTheme(Customer customer)
-   {
+   public static void playCharecterTheme(Customer customer){
       charecterTheme.clip = customer.theme;
       mainTheme.Stop();
       charecterTheme.Play();
+   }
+
+   public static void playItemSoundeffect(Return item){
+      soundEffect.clip = item.soundEffect;
+      soundEffect.Play();
    }
 
    void Start()
