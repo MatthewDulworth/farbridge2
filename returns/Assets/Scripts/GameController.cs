@@ -58,15 +58,12 @@ public class GameController : MonoBehaviour
 
       packageSprite.sprite = days[currentDay].customers[customerIndex].returnedGoods.package;
       receiptSprite.sprite = days[currentDay].customers[customerIndex].returnedGoods.receipt;
-   }
 
+      dialougeTextBox.text = currentCustomer.introDialouge;
+   }
    void endCustomer(){
       Debug.LogFormat("happiness {0}, funds {1}", happiness, funds);
-
-      Destroy(parentCustomer.transform.GetChild(0));
-      //Destroy(parentPackage.transform.GetChild(0));
-      //Destroy(parentRecipt.transform.GetChild(0));
-
+      Destroy(parentCustomer.transform.GetChild(0).gameObject);
       customerIndex++;
       if(customerIndex != days[currentDay].customers.Count){
          newCustomer();
@@ -77,15 +74,23 @@ public class GameController : MonoBehaviour
    
    public void accept() {
       Debug.LogFormat("Package {0} accepted", customerIndex);
-      int value = (currentCustomer.returnedGoods.legit) ? 15 : 10;
-      changeHappiness(value);
-      changeFunds(-10);
+
+      if(currentCustomer.returnedGoods.legit){
+         dialougeTextBox.text = currentCustomer.acceptDialouge;
+         wins++;
+      } else{
+         dialougeTextBox.text = currentCustomer.denyDialouge;
+      }
       endCustomer();
    }
    public void deny() {
       Debug.LogFormat("package {0} denied", customerIndex);
-      int value = (currentCustomer.returnedGoods.legit) ? -15 : -10;
-      changeHappiness(value);
+      if(currentCustomer.returnedGoods.legit){
+         dialougeTextBox.text = currentCustomer.acceptDialouge;
+      } else{
+         wins++;
+         dialougeTextBox.text = currentCustomer.denyDialouge;
+      }
       endCustomer();
    }
    // TODO: make this work
