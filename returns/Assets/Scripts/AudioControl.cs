@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
-   [SerializeField] AudioSource MainTheme;
+   [SerializeField] static AudioSource MainTheme;
    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
    {
       float startVolume = audioSource.volume;
@@ -30,9 +30,9 @@ public class AudioControl : MonoBehaviour
    {
       if(customer.theme != null)
       {
-         FadeOut(MainTheme, 2f);
-         FadeIn(customer.theme, 2f);
-         customer.theme.play();
+         FadeOut(MainTheme, 2);
+         FadeIn(customer.theme, 2);
+         customer.theme.Play();
       }
    }
 
