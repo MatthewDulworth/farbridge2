@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
         Application.Quit();
 #endif
     }
-    void winGame(){
+   void winGame(){
       // the manager has some positive dialouge
       Debug.LogFormat("You win");
 #if UNITY_EDITOR
@@ -129,7 +129,7 @@ public class GameController : MonoBehaviour
         Application.Quit();
 #endif
     }
-    void joeMama(){
+   void joeMama(){
       // joe mama ending
    }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class AudioControl : MonoBehaviour
 {
    [SerializeField] AudioSource MainTheme;
+   [SerializeField] AudioSource CharecterTheme;
+   [SerializeField] AudioSource SoundEffect;
    [SerializeField] int FadeTime;
 
    static AudioSource mainTheme;
@@ -35,31 +37,37 @@ public class AudioControl : MonoBehaviour
    
    public static void playCharecterTheme(Customer customer)
    {
+      // charecterTheme.clip = customer.theme;
+      // if(charecterTheme.clip != null)
+      // {
+      //    FadeOut(mainTheme, fadeTime);
+      //    FadeIn(charecterTheme, fadeTime);
+      // }
+
       charecterTheme.clip = customer.theme;
-      if(charecterTheme.clip != null)
-      {
-         FadeOut(mainTheme, fadeTime);
-         FadeIn(charecterTheme, fadeTime);
-      }
+      charecterTheme.Play();
    }
 
    void Start()
    {
       mainTheme = MainTheme;
-      mainTheme.Play();
+      charecterTheme = CharecterTheme;
+      soundEffect = SoundEffect;
+      // mainTheme.Play();
    }
    void Update()
    {
-      mainTheme.loop = true;
+      // mainTheme.loop = true;
 
-      if(charecterTheme.clip != null){
-         if(!charecterTheme.isPlaying){
-            FadeIn(mainTheme, fadeTime);
-         }
-      } else{
-         if(!mainTheme.isPlaying){
-            FadeIn(mainTheme, fadeTime);
-         }
-      }
+      // if(charecterTheme.clip != null){
+      //    if(!charecterTheme.isPlaying){
+      //       FadeIn(mainTheme, fadeTime);
+      //    }
+      // } else{
+      //    if(!mainTheme.isPlaying){
+      //       FadeIn(mainTheme, fadeTime);
+      //    }
+      // }
+
    }
 }
