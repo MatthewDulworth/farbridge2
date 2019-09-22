@@ -311,7 +311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 48238960}
   - component: {fileID: 48238961}
-  - component: {fileID: 48238962}
   m_Layer: 5
   m_Name: Customer
   m_TagString: Untagged
@@ -355,18 +354,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &48238962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48238959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c451e6371b1f14c85c22bf472575f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &82087106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,57 +2527,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f843f29bc3fa1f848adfc3822f83a6d5, type: 2}
   packageImage: {fileID: 1622864928}
   receiptImage: {fileID: 1385062771}
-  waitTime: 3
-  CustomerLeaves:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 48238962}
-        m_MethodName: PlayWalkOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 835486160}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CustomerEnters:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 48238962}
-        m_MethodName: PlayWalkIn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 835486160}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &1385062769
 GameObject:
   m_ObjectHideFlags: 0
