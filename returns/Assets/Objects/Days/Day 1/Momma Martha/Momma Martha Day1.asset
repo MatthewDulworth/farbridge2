@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7f85b3e4cb3b492997f61937114effc, type: 3}
-  m_Name: Momma Martha
+  m_Name: Momma Martha Day1
   m_EditorClassIdentifier: 
   gameObject: {fileID: 0}
-  recipt: {fileID: 0}
-  package: {fileID: 0}
+  returnedGoods: {fileID: 11400000, guid: 58fbb1147914db54bb0415401806bcb5, type: 2}
   introDialouge: "Yes, I just spoke to Tobias on the phone. He said that you would
     give me my money back! Johnny, don\u2019t stick that in your nose!"
   acceptDialouge: Well then, I guess this store is good for something! Johnny, eat

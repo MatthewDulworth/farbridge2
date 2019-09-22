@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 124509236}
   - component: {fileID: 124509235}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ RectTransform:
   m_GameObject: {fileID: 124509233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.020310031, y: 0.011279697, z: 1.0000354}
+  m_LocalScale: {x: 0.016755775, y: 0.012689658, z: 1.0000354}
   m_Children:
   - {fileID: 1165872199}
   m_Father: {fileID: 658668885}
@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.42, y: -0.2}
+  m_AnchoredPosition: {x: -2.06, y: -0.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124509235
@@ -519,8 +519,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: -2}
-  m_SizeDelta: {x: 8, y: 4.5}
+  m_AnchoredPosition: {x: 0.0038533, y: -0.00060654}
+  m_SizeDelta: {x: 6.8188, y: 5.7888}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &658668886
 MonoBehaviour:
@@ -585,7 +585,7 @@ RectTransform:
   m_GameObject: {fileID: 841734780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -24}
-  m_LocalScale: {x: 0.014371718, y: 0.025066, z: 0}
+  m_LocalScale: {x: 0.012505182, y: 0.033198256, z: 0}
   m_Children:
   - {fileID: 1982630683}
   m_Father: {fileID: 658668885}
@@ -593,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.32, y: 1.1}
+  m_AnchoredPosition: {x: -2.01, y: 1.4117998}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &841734782
