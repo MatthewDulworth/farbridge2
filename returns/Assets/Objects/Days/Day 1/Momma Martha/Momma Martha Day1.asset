@@ -15,6 +15,7 @@ MonoBehaviour:
   gameObject: {fileID: 8780521470552760048, guid: decf91e018b4d88448a98e1b78a92935,
     type: 3}
   returnedGoods: {fileID: 11400000, guid: 58fbb1147914db54bb0415401806bcb5, type: 2}
+  theme: {fileID: 8300000, guid: f8ab98d4c648b4b82a0b19ea7e904a9f, type: 3}
   introDialouge: "Yes, I just spoke to Tobias on the phone. He said that you would
     give me my money back! Johnny, don\u2019t stick that in your nose!"
   acceptDialouge: Well then, I guess this store is good for something! Johnny, eat

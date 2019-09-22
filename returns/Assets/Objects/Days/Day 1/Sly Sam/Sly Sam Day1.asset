@@ -15,6 +15,7 @@ MonoBehaviour:
   gameObject: {fileID: 5355715274972985324, guid: de23d961e1272484da5bd365b656e0cd,
     type: 3}
   returnedGoods: {fileID: 11400000, guid: ae7f86e39e1272c4daceffb3bd94aebf, type: 2}
+  theme: {fileID: 8300000, guid: ddc572c0d467c406cbde7f15acce9ca1, type: 3}
   introDialouge: Hey there, Jack! I just bought this a while back. Ima need some cash,
     stat!
   acceptDialouge: HueHueHue. Thanks for the cash, Jack! Smell ya later!

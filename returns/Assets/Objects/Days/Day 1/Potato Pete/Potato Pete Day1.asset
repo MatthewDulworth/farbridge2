@@ -15,6 +15,7 @@ MonoBehaviour:
   gameObject: {fileID: 9008820178898753765, guid: 5a462a2c62fa5644e9ebf9971803c3e1,
     type: 3}
   returnedGoods: {fileID: 11400000, guid: 85d6b66dde5702d46908fdbba078a689, type: 2}
+  theme: {fileID: 8300000, guid: 1d58a08ec39e04a98a9a37a821748117, type: 3}
   introDialouge: Howdy spud! This should be appealing.
   acceptDialouge: Thank spud. My ship hash come in!
   denyDialouge: Tuberd. Looks like we got off to a bad starch.

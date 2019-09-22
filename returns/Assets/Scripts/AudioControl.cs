@@ -31,8 +31,8 @@ public class AudioControl : MonoBehaviour
       if(customer.theme != null)
       {
          FadeOut(MainTheme, 2);
-         FadeIn(customer.theme, 2);
-         customer.theme.Play();
+         //FadeIn(customer.theme, 2);
+         //customer.theme.Play();
       }
    }
 

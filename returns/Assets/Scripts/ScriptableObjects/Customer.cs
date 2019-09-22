@@ -6,7 +6,7 @@ using UnityEngine;
 public class Customer : ScriptableObject {
    public GameObject gameObject;
    public Return returnedGoods;
-   public AudioSource theme;
+   public AudioClip theme;
 
    public string introDialouge;
    public string acceptDialouge;
