@@ -7,6 +7,7 @@ public class Return : ScriptableObject {
     public bool legit;
     public Sprite receipt;
     public Sprite package;
+    public AudioClip soundEffect;
 
     [SerializeField]
     private string[] descriptions;
