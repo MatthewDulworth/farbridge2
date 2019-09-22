@@ -1139,7 +1139,13 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 40
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 100703771171554880, guid: ed2c7855b488bf0448e9378db08090e5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 100703771171554880, guid: ed2c7855b488bf0448e9378db08090e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ed2c7855b488bf0448e9378db08090e5, type: 3}
 --- !u!224 &463892331 stripped
 RectTransform:
@@ -2540,7 +2546,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f843f29bc3fa1f848adfc3822f83a6d5, type: 2}
   packageImage: {fileID: 1622864928}
   receiptImage: {fileID: 1385062771}
-  waitTime: 0
+  waitTime: 3
   CustomerLeaves:
     m_PersistentCalls:
       m_Calls:
@@ -2947,7 +2953,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 463892330}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1450141869
+--- !u!95 &1450141867
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
