@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
    }
    // TODO: make this work
    public void inspect() {
-      dialougeTextBox.text = currentCustomer.returnedGoods.package.description;
+      descriptionTextBox.text = currentCustomer.returnedGoods.getDescription();
       Debug.LogFormat("You opened the box, description: {0}", currentCustomer.returnedGoods.getDescription());
     }
    public void back(){
